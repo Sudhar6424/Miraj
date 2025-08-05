@@ -45,6 +45,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
+        <div className="navbar__center">
 
         {/* Desktop Search */}
         <div className="navbar__center desktop-only">
@@ -83,6 +84,8 @@ const Navbar = () => {
             <FaBars size={24} color="black" />
           )}
         </button>
+        </div>
+
       </nav>
 
       {/* Mobile Search */}
