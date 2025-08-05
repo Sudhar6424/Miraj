@@ -1,0 +1,43 @@
+/* src/components/CategoryBar.css */
+.category-bar {
+  display: flex;
+  gap: 26px;
+  overflow-x: auto;
+  padding: 12px 24px;
+  background: #f9f9f9;
+  border-bottom: 2px solid #eee;
+  scrollbar-width: none; /* Firefox */
+}
+
+.category-bar::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.category-item {
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #333;
+}
+
+.category-item:hover {
+  background: #ffecda;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.category-icon {
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+.category-label {
+  font-size: 1rem;
+}
