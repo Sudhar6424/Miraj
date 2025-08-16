@@ -25,6 +25,35 @@ const products = [
     price: 280,
     image: C3,
   },
+   {
+    id: 4,
+    title: 'Vanilla Bean Candle',
+    description: 'Warm vanilla fragrance for cozy nights.',
+    price: 280,
+    image: C3,
+  },
+   {
+    id: 3,
+    title: 'Vanilla Bean Candle',
+    description: 'Warm vanilla fragrance for cozy nights.',
+    price: 280,
+    image: C3,
+  },
+   {
+    id: 3,
+    title: 'Vanilla Bean Candle',
+    description: 'Warm vanilla fragrance for cozy nights.',
+    price: 280,
+    image: C3,
+  },
+   {
+    id: 3,
+    title: 'Vanilla Bean Candle',
+    description: 'Warm vanilla fragrance for cozy nights.',
+    price: 280,
+    image: C3,
+  },
+  
 ];
 
 export default products;

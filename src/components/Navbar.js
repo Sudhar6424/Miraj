@@ -1,116 +1,97 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars, FaSearch, FaHeart } from 'react-icons/fa';
-import { AiOutlineMenuFold } from 'react-icons/ai';
+import { FaHome, FaBars, FaTimes, FaSearch, FaHeart, FaShoppingCart, FaInfoCircle } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import './Navbar.css'; // your CSS file
-import MLogo from '../components/MLogo.png'; // your logo image path
+import { MdPhoneAndroid } from 'react-icons/md'; 
+import './Navbar.css';
+import MLogo from '../components/MLogo.png';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
-  const lastScrollY = useRef(0); // useRef to keep state across renders
+  const lastScrollY = useRef(0);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
+  const toggleMenu = () => {
+    setMenuOpen(prev => !prev);
+    document.body.classList.toggle('menu-open', !menuOpen);
+  };
+  const closeMenu = () => {
+    setMenuOpen(false);
+    document.body.classList.remove('menu-open');
+  };
 
   useEffect(() => {
     lastScrollY.current = window.scrollY;
-
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-        // scrolling down
+      const current = window.scrollY;
+      // show when scrolling up, hide when down (Flipkart-like)
+      if (current > lastScrollY.current && current > 50) {
         setShowNavbar(false);
       } else {
-        // scrolling up
         setShowNavbar(true);
       }
-      lastScrollY.current = currentScrollY;
+      lastScrollY.current = current;
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      {/* Navbar */}
       <nav className={`navbar ${showNavbar ? 'show' : 'hide'}`}>
-        {/* Left Logo */}
+        {/* LEFT: logo */}
         <div className="navbar__left">
-          <div className="navbar__logo">
-            <Link to="/">
-              <img src={MLogo} alt="Logo" className="logo-image" />
-            </Link>
-          </div>
+          <Link to="/" className="navbar__logo" onClick={closeMenu}>
+            <img src={MLogo} alt="Logo" />
+          </Link>
         </div>
+
         <div className="navbar__center">
-
-        {/* Desktop Search */}
-        <div className="navbar__center desktop-only">
-          <div className="navbar__search">
+          <div className="navbar__search desktop-only">
             <FaSearch className="search-icon" />
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search for candles, scents..."
-              aria-label="Search"
-            />
+            <input className="search-input" placeholder="Search for candles, scents..." />
           </div>
         </div>
 
-        {/* Desktop Links */}
+        {/* RIGHT: desktop links (hidden on mobile) */}
         <div className="navbar__right desktop-only">
           <Link to="/" onClick={closeMenu}>Home</Link>
-          <Link to="/wishlist" onClick={closeMenu}>
-            <FaHeart style={{ marginRight: '5px' }} /> Wishlist
-          </Link>
-          <Link to="/cart" onClick={closeMenu}>
-            <MdOutlineShoppingCart style={{ marginRight: '5px' }} /> Cart
-          </Link>
+          <Link to="/wishlist" onClick={closeMenu}><FaHeart style={{ marginRight: 6 }} /> Wishlist</Link>
+          <Link to="/cart" onClick={closeMenu}><MdOutlineShoppingCart style={{ marginRight: 6 }} /> Cart</Link>
         </div>
 
-        {/* Mobile Toggle Button */}
+
         <button
           className="navbar__toggle mobile-only"
           onClick={toggleMenu}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
-          {menuOpen ? (
-            <AiOutlineMenuFold size={24} color="black" />
-          ) : (
-            <FaBars size={24} color="black" />
-          )}
+          {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
         </button>
-        </div>
-
       </nav>
 
-      {/* Mobile Search */}
       <div className="mobile-search-container mobile-only">
         <div className="navbar__search">
           <FaSearch className="search-icon" />
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search for candles, scents..."
-            aria-label="Search"
-          />
+          <input className="search-input" placeholder="Search for candles, scents..." />
         </div>
       </div>
 
-      {/* Overlay for mobile menu */}
+      {/* overlay + side menu */}
       <div className={`overlay ${menuOpen ? 'open' : ''}`} onClick={closeMenu}></div>
 
-      {/* Side menu */}
       <aside className={`sidemenu ${menuOpen ? 'open' : ''}`}>
-        <Link to="/" onClick={closeMenu}>Home</Link>
-        <Link to="/wishlist" onClick={closeMenu}>Wishlist</Link>
-        <Link to="/cart" onClick={closeMenu}>Cart</Link>
-        <button className="close-btn" onClick={closeMenu}>Close</button>
+        <div className="sidemenu__content">
+          <Link to="/" onClick={closeMenu}><FaHome /> Home</Link>
+          <Link to="/wishlist" onClick={closeMenu}><FaHeart /> Wishlist</Link>
+          <Link to="/cart" onClick={closeMenu}><FaShoppingCart /> Cart</Link>
+          <Link to="/about" onClick={closeMenu}><FaInfoCircle /> About Us</Link>
+          <Link to="/contact" onClick={closeMenu}><MdPhoneAndroid size={24} /> Contact</Link>
+        </div>
       </aside>
+
+
     </>
   );
 };

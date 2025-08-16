@@ -1,0 +1,58 @@
+/* components/Footer.css */
+.footer {
+  background-color: #252525; /* Deep charcoal for elegance */
+  color: #f5f5f5;            /* Soft near-white text */
+  padding: 50px 80px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 40px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section h4 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #007BFF; /* Vibrant brand accent */
+  text-transform: uppercase;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 10px;
+}
+
+.footer-section a {
+  color: #d1d1d1;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.25s ease-in-out;
+}
+
+.footer-section a:hover {
+  color: #007BFF;
+}
+
+.footer-section p, .footer-section span {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  border-top: 1px solid #3a3a3a;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
+}
